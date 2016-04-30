@@ -35,7 +35,7 @@ public class NewFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_feed);
         unbinder = ButterKnife.bind(this);
-        newsFeedAdapter = new NewsFeedAdapter(this);
+        newsFeedAdapter = new NewsFeedAdapter();
         newsFeedList.setLayoutManager(new LinearLayoutManager(this));
         newsFeedList.setAdapter(newsFeedAdapter);
         populateNewsFeed();

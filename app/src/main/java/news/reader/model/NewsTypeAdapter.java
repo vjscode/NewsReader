@@ -60,7 +60,7 @@ public class NewsTypeAdapter extends TypeAdapter<List<News>> {
                 news.setTitle(in.nextString());
             } else if (key.equals("abstract")) {
                 news.setAbstractContent(in.nextString());
-            } else if (key.equals("media") && in.peek() != JsonToken.NULL) {
+            } else if (key.equals("media") && in.peek() == JsonToken.BEGIN_ARRAY) {
                 //parse media
                 readMediaList(news, in);
             } else {

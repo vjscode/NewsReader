@@ -12,6 +12,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import news.reader.NewsFeedApplication;
 import news.reader.R;
 import news.reader.model.News;
 
@@ -20,11 +23,12 @@ import news.reader.model.News;
  */
 public class NewsFeedAdapter extends RecyclerView.Adapter<NewsCardViewHolder> {
 
-    private Context mContext;
+    @Inject
+    public Context mContext;
     private List<News> newsList = new ArrayList<>();
 
-    public NewsFeedAdapter(Context context) {
-        mContext = context;
+    public NewsFeedAdapter() {
+        NewsFeedApplication.getAppComponent().inject(this);
     }
 
     @Override
@@ -38,7 +42,11 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsCardViewHolder> {
     public void onBindViewHolder(NewsCardViewHolder holder, int position) {
         News news = newsList.get(position);
         holder.txtAbstractContent.setText(news.getAbstractContent());
-        loadImage(news.getMediaList().get(6).getImgUrl(), holder.imgNews);
+        if (news.getMediaList() != null && news.getMediaList().size() > 0) {
+            int size = news.getMediaList().size();
+            int index = size > 0 ? size - 1 : 0;
+            loadImage(news.getMediaList().get(index).getImgUrl(), holder.imgNews);
+        }
     }
 
     private void loadImage(String url, ImageView view) {

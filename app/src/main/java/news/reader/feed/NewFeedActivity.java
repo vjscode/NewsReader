@@ -36,8 +36,16 @@ public class NewFeedActivity extends AppCompatActivity implements NewsFeedView {
     }
 
     private void setUpPresenter() {
-        newsFeedPresenter = new NewsFeedPresenterImpl(this);
-        newsFeedPresenter.fetchNewsAndDisplay();
+        Object lastConfig = getLastCustomNonConfigurationInstance();
+        if (lastConfig != null) {
+            SavedNewsFeed savedNewsFeed = (SavedNewsFeed) lastConfig;
+            newsFeedPresenter = savedNewsFeed.newsFeedPresenter;
+            newsFeedPresenter.display(this);
+
+        } else {
+            newsFeedPresenter = new NewsFeedPresenterImpl(this);
+            newsFeedPresenter.fetchNewsAndDisplay();
+        }
     }
 
 
@@ -50,5 +58,12 @@ public class NewFeedActivity extends AppCompatActivity implements NewsFeedView {
     @Override
     public void onNewsFeedFetchComplete(List<News> news) {
         newsFeedAdapter.setNewsList(news);
+    }
+
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        SavedNewsFeed savedNewsFeed = new SavedNewsFeed();
+        savedNewsFeed.newsFeedPresenter = newsFeedPresenter;
+        return savedNewsFeed;
     }
 }

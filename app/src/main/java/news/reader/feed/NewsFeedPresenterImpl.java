@@ -18,6 +18,7 @@ public class NewsFeedPresenterImpl implements NewsFeedPresenter {
     private static final String TAG = "NewsFeedPresenter";
     private NewsFeedView newsFeedView;
     private Subscription newsFeedSubscription;
+    private List<News> newsList;
 
     public NewsFeedPresenterImpl(NewsFeedView newsFeedView) {
         this.newsFeedView = newsFeedView;
@@ -42,6 +43,7 @@ public class NewsFeedPresenterImpl implements NewsFeedPresenter {
 
                                @Override
                                public void onNext(List<News> news) {
+                                   newsList = news;
                                    newsFeedView.onNewsFeedFetchComplete(news);
                                }
                            }
@@ -53,5 +55,14 @@ public class NewsFeedPresenterImpl implements NewsFeedPresenter {
         if (!newsFeedSubscription.isUnsubscribed()) {
             newsFeedSubscription.unsubscribe();
         }
+    }
+
+    public Subscription getNewsFeedSubscription() {
+        return newsFeedSubscription;
+    }
+
+    public void display(NewsFeedView view) {
+        this.newsFeedView = view;
+        newsFeedView.onNewsFeedFetchComplete(newsList);
     }
 }

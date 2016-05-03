@@ -5,5 +5,6 @@ package news.reader.feed;
  */
 public interface NewsFeedPresenter {
     void fetchNewsAndDisplay();
+    void display(NewsFeedView view);
     void onDestroy();
 }

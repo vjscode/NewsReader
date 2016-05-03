@@ -3,8 +3,7 @@ Boilerplate code for any connected app that consumes data from a web service bui
 
 # Why does this exist
 Interns and Android beginners I meet always have questions about the best way to start writing an Android app. They have
-questions about the best practices, popular libraries etc. So I decided to hack something up with the best in class SDKs I
-know of. This project is not generic enough to fork it and start using it, but can be very well used to know how to kick start and get on road as quickly as possible. I decided to keep this project simple by design.
+questions about the best practices, popular libraries, app architecture etc. So I decided to hack something up with the best in class SDKs I know of on top of an MVP architecture. This project is not generic enough to fork it and start using it, but can be very well used to know how to kick start and get on road as quickly as possible. I decided to keep this project simple by design.
 
 License
 =======

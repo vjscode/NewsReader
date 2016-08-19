@@ -1,6 +1,8 @@
 *.iml
 /.idea/workspace.xml
 /.idea/libraries
+/.idea/runConfigurations.xml
+projectFilesBackup/*
 .DS_Store
 # Built application files
 *.apk

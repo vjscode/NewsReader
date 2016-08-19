@@ -17,9 +17,9 @@ import news.reader.NewsFeedApplication;
 import news.reader.R;
 import news.reader.model.News;
 
-public class NewFeedActivity extends BaseActivity implements NewsFeedView {
+public class NewsFeedActivity extends BaseActivity implements NewsFeedView {
 
-    private static final String TAG = NewFeedActivity.class.getSimpleName();
+    private static final String TAG = NewsFeedActivity.class.getSimpleName();
     @BindView(R.id.newsReaderList)
     public RecyclerView newsFeedList;
 
@@ -34,7 +34,6 @@ public class NewFeedActivity extends BaseActivity implements NewsFeedView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_feed);
         unbinder = ButterKnife.bind(this);
-        //newsFeedAdapter = new NewsFeedAdapter();
         newsFeedList.setLayoutManager(new LinearLayoutManager(this));
         newsFeedList.setAdapter(newsFeedAdapter);
         setUpPresenter();

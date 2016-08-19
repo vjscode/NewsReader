@@ -2,7 +2,7 @@ package news.reader;
 
 import dagger.Module;
 import dagger.Provides;
-import news.reader.feed.NewFeedActivity;
+import news.reader.feed.NewsFeedActivity;
 import news.reader.feed.NewsFeedAdapter;
 import news.reader.feed.NewsFeedPresenter;
 import news.reader.feed.NewsFeedPresenterImpl;
@@ -12,21 +12,21 @@ import news.reader.feed.NewsFeedPresenterImpl;
  */
 @Module
 public class NewsFeedActivityModule {
-    NewFeedActivity newFeedActivity;
+    NewsFeedActivity newsFeedActivity;
 
-    public NewsFeedActivityModule(NewFeedActivity newFeedActivity) {
-        this.newFeedActivity = newFeedActivity;
+    public NewsFeedActivityModule(NewsFeedActivity newsFeedActivity) {
+        this.newsFeedActivity = newsFeedActivity;
     }
 
     @Provides
     @ActivityScope
     NewsFeedAdapter providesNewsFeedAdapter() {
-        return new NewsFeedAdapter(newFeedActivity);
+        return new NewsFeedAdapter(newsFeedActivity);
     }
 
     @Provides
     @ActivityScope
     NewsFeedPresenter providesNewsFeedPresenterImpl() {
-        return new NewsFeedPresenterImpl(newFeedActivity);
+        return new NewsFeedPresenterImpl(newsFeedActivity);
     }
 }

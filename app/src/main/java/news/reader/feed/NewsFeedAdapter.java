@@ -12,9 +12,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import news.reader.NewsFeedApplication;
 import news.reader.R;
 import news.reader.model.News;
 
@@ -23,12 +20,11 @@ import news.reader.model.News;
  */
 public class NewsFeedAdapter extends RecyclerView.Adapter<NewsCardViewHolder> {
 
-    @Inject
     public Context mContext;
     private List<News> newsList = new ArrayList<>();
 
-    public NewsFeedAdapter() {
-        NewsFeedApplication.getAppComponent().inject(this);
+    public NewsFeedAdapter(Context context) {
+        mContext = context;
     }
 
     @Override

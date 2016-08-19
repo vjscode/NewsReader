@@ -1,19 +1,23 @@
 package news.reader.feed;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import news.reader.BaseActivity;
+import news.reader.NewsFeedActivityModule;
+import news.reader.NewsFeedApplication;
 import news.reader.R;
 import news.reader.model.News;
 
-public class NewFeedActivity extends AppCompatActivity implements NewsFeedView {
+public class NewFeedActivity extends BaseActivity implements NewsFeedView {
 
     private static final String TAG = NewFeedActivity.class.getSimpleName();
     @BindView(R.id.newsReaderList)
@@ -21,7 +25,8 @@ public class NewFeedActivity extends AppCompatActivity implements NewsFeedView {
 
     private Unbinder unbinder;
 
-    private NewsFeedAdapter newsFeedAdapter;
+    @Inject
+    NewsFeedAdapter newsFeedAdapter;
     private NewsFeedPresenter newsFeedPresenter;
 
     @Override
@@ -29,7 +34,7 @@ public class NewFeedActivity extends AppCompatActivity implements NewsFeedView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_feed);
         unbinder = ButterKnife.bind(this);
-        newsFeedAdapter = new NewsFeedAdapter();
+        //newsFeedAdapter = new NewsFeedAdapter();
         newsFeedList.setLayoutManager(new LinearLayoutManager(this));
         newsFeedList.setAdapter(newsFeedAdapter);
         setUpPresenter();
@@ -65,5 +70,10 @@ public class NewFeedActivity extends AppCompatActivity implements NewsFeedView {
         SavedNewsFeed savedNewsFeed = new SavedNewsFeed();
         savedNewsFeed.newsFeedPresenter = newsFeedPresenter;
         return savedNewsFeed;
+    }
+
+    @Override
+    protected void setUpDependencies() {
+        NewsFeedApplication.getAppComponent().build(new NewsFeedActivityModule(this)).inject(this);
     }
 }
